@@ -1,0 +1,18 @@
+main: me.benrobson.MCSessify.MCSessifyMain
+name: MCSessify
+version: 1.0
+author: Ben Robson
+#api-version:
+
+commands:
+  verify:
+    description: Allows a player to verify themselves for access to Server.
+    usage: /verify [token]
+  createtoken:
+    description: Allows a Server Administrator to create a new or change an existing Server Session token.
+
+permissions:
+  mcsessify.verify:
+    default: not op
+  mcsessify.createtoken:
+    default: op
