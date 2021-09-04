@@ -1,8 +1,8 @@
-main: me.benrobson.MCSessify.MCSessifyMain
+main: me.benrobson.mcsessify.MCSessifyMain
 name: MCSessify
 version: 1.0
 author: Ben Robson
-#api-version:
+api-version: 1.17
 
 commands:
   verify:

@@ -1,4 +1,11 @@
-SESSIONTOKEN: ""
+SESSIONTOKEN: "TESTTOKEN2021"
+EVENTNAME: "Test Event 2021"
 
 LANG:
-  PREFIX: ""
+  PREFIX: "&8&l[&6&lMC&3&lSESSIFY&8&l]"
+  NOTAUSER: "&cYou must be a user to be able to execute this command."
+  NOUSERTOKEN: "&cNo token detected, provide a token to gain access [/verify TOKEN]."
+  INCORRECTUSERTOKEN: "&cThe token that you have entered is incorrect, try again."
+  CORRECTUSERTOKEN: "&aYou are now verified for the event %EVENTNAME%."
+  USERALREADYVERIFIED: "&eYou are already verified."
+  USERNOTVERIFIED: "&cYou are not verified, use /verify [TOKEN] to gain access."
