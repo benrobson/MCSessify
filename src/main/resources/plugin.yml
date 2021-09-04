@@ -8,11 +8,12 @@ commands:
   verify:
     description: Allows a player to verify themselves for access to Server.
     usage: /verify [token]
-  createtoken:
-    description: Allows a Server Administrator to create a new or change an existing Server Session token.
+  token:
+    description: Allows a Server Administrator view and set a new token.
+    usage: /token [view/set]
 
 permissions:
   mcsessify.verify:
     default: not op
-  mcsessify.createtoken:
+  mcsessify.token:
     default: op

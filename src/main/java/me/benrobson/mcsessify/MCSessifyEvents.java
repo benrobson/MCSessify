@@ -43,10 +43,11 @@ public class MCSessifyEvents implements Listener {
         Player player = event.getPlayer();
         String userCommand = event.getMessage();
 
-        if (userCommand.startsWith("/verify")) {
+        if (userCommand.startsWith("/verify") || userCommand.startsWith("/token") || userCommand.startsWith("/reload")) {
             event.setCancelled(false);
         } else {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("LANG.PREFIX").toString()) + " " + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("LANG.USERNOTVERIFIED").toString()));
+            event.setCancelled(true);
         }
     }
 

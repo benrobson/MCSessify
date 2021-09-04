@@ -1,5 +1,6 @@
 package me.benrobson.mcsessify;
 
+import me.benrobson.mcsessify.commands.token;
 import me.benrobson.mcsessify.commands.verify;
 import org.bukkit.ChatColor;
 import org.bukkit.plugin.PluginManager;
@@ -16,16 +17,18 @@ public class MCSessifyMain extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "\n\nMCSessify has been enabled.\nRunning Version " + plugin.getDescription().getVersion() + "\nGitHub Repository: https://github.com/benrobson/MCSessify\nCreated by Ben Robson\n\n");
 
         this.getCommand("verify").setExecutor(new verify());
+        this.getCommand("token").setExecutor(new token());
 
         PluginManager pluginmanager = this.getServer().getPluginManager();
         pluginmanager.registerEvents(new MCSessifyEvents(this), this);
 
-        plugin.saveDefaultConfig();
+        saveDefaultConfig();
     }
 
     @Override
     public void onDisable() {
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "\n\nMCSessify has been disabled.\n\n");
+        plugin.saveConfig();
     }
 
     public static MCSessifyMain getInstance() {
