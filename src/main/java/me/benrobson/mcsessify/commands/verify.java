@@ -35,6 +35,7 @@ public class verify implements CommandExecutor {
                 // Check if token matches session token
                 if (strings[0].equals(sessionToken)) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("LANG.PREFIX").toString()) + " " + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("LANG.CORRECTUSERTOKEN").toString().replace("%EVENTNAME%", plugin.getConfig().get("EVENTNAME").toString())));
+//                    Bukkit.broadcast(ChatColor.YELLOW + player.getName() + " has joined the server.");
                     sessionVerifiedUsers.add(player);
                 } else {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("LANG.PREFIX").toString()) + " " + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("LANG.INCORRECTUSERTOKEN").toString()));

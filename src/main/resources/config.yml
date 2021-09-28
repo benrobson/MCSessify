@@ -6,7 +6,7 @@ LANG:
   NOTAUSER: "&cYou must be a user to be able to execute this command."
   NOUSERTOKEN: "&cNo token detected, provide a token to gain access [/verify TOKEN]."
   INCORRECTUSERTOKEN: "&cThe token that you have entered is incorrect, try again."
-  CORRECTUSERTOKEN: "&aYou are now verified for the event %EVENTNAME%."
+  CORRECTUSERTOKEN: "&aYou are now verified."
   USERALREADYVERIFIED: "&eYou are already verified."
   USERNOTVERIFIED: "&cYou are not verified, use /verify [TOKEN] to gain access."
   TOKENARGSOPTIONS: "&ePlease use one of the following /token [view/set]"

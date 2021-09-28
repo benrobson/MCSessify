@@ -5,7 +5,9 @@ import me.benrobson.mcsessify.commands.verify;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.*;
@@ -43,7 +45,7 @@ public class MCSessifyEvents implements Listener {
         Player player = event.getPlayer();
         String userCommand = event.getMessage();
 
-        if (userCommand.startsWith("/verify") || userCommand.startsWith("/token") || userCommand.startsWith("/reload")) {
+        if (userCommand.startsWith("/verify") || userCommand.startsWith("/token") || userCommand.startsWith("/reload") || verify.isUserVerified(player)) {
             event.setCancelled(false);
         } else {
             player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("LANG.PREFIX").toString()) + " " + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("LANG.USERNOTVERIFIED").toString()));
@@ -62,9 +64,16 @@ public class MCSessifyEvents implements Listener {
     }
 
     // Suppress Player Interaction for non-verified
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void UserInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
+
+        // Check for a left and right click
+        if (event.getAction() == Action.LEFT_CLICK_AIR || event.getAction() == Action.LEFT_CLICK_BLOCK || event.getAction() == Action.RIGHT_CLICK_AIR || event.getAction() == Action.RIGHT_CLICK_BLOCK || event.getAction() == Action.PHYSICAL) {
+            if (verify.isUserVerified(player) == false) {
+                event.setCancelled(true);
+            }
+        }
 
         if (verify.isUserVerified(player) == false) {
             event.setCancelled(true);
@@ -92,20 +101,6 @@ public class MCSessifyEvents implements Listener {
         }
     }
 
-    // Suppress Player Opening Inventory for non-verified
-//    @EventHandler
-//    public void UserInventoryOpen(InventoryOpenEvent event) {
-//        Player player = (Player) event.getPlayer();
-//
-//        if (player.getOpenInventory().getType() == InventoryType.PLAYER || player.getOpenInventory().getType() == InventoryType.CREATIVE) {
-//            if (verify.isUserVerified(player) == false) {
-//                player.sendMessage(ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("LANG.PREFIX").toString()) + " " + ChatColor.translateAlternateColorCodes('&', plugin.getConfig().get("LANG.USERNOTVERIFIED").toString()));
-//                event.getPlayer().closeInventory();
-//                event.setCancelled(true);
-//            }
-//        }
-//    }
-
     // Suppress Player Chat for non-verified
     @EventHandler
     public void UserChat(AsyncChatEvent event) {
@@ -128,4 +123,39 @@ public class MCSessifyEvents implements Listener {
             }
         }
     }
+
+    // Suppress Player join message
+    @EventHandler
+    public void UserJoin(PlayerJoinEvent event) {
+        Player player = event.getPlayer();
+        event.setJoinMessage("");
+    }
+
+//    // Suppress Player Inventory for non-verified
+//    @EventHandler(priority = EventPriority.HIGHEST)
+//    public void UserClickEvent(InventoryClickEvent event) {
+//        Player player = event.getWhoClicked().getKiller();
+//        ItemStack clicked = event.getCurrentItem();
+//
+//        if (clicked.getType() == Material.LEATHER_HELMET || clicked.getType() == Material.COMPASS || clicked.getType() == Material.CHEST || clicked.getType() == Material.CLOCK) {
+//            if (verify.isUserVerified(player) == false) {
+//                event.getInventory().close();
+//                event.setCancelled(true);
+//            }
+//        }
+//
+//        if (verify.isUserVerified(player) == false) {
+//            event.getInventory().close();
+//            event.setCancelled(true);
+//        }
+//    }
+
+//    public void UserInventoryOpen(InventoryOpenEvent event) {
+//        Player player = (Player) event.getPlayer();
+//
+//        if (verify.isUserVerified(player) == false) {
+//            event.getInventory().close();
+//            event.setCancelled(true);
+//        }
+//    }
 }
